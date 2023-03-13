@@ -5,6 +5,7 @@ const dbconnect = require('./Database/dbConnect');
 const userRoute = require('./routes/user.routes');
 const packageRoute = require('./routes/package.routes');
 const queryRoute = require('./routes/query.routes');
+const bookingRoute = require('./routes/booking.routes');
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 app.use('/', userRoute)
 app.use('/', packageRoute)
 app.use('/queries', queryRoute)
+app.use('/booking', bookingRoute)
 
 
 app.listen(port, () => {
