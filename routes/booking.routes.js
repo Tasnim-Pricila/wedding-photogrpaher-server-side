@@ -10,5 +10,7 @@ bookingRoute.route('/:id')
     .patch(bookingController.updateBookingById)
 bookingRoute.route('/package/:packageId')
     .get(bookingController.getBookingByPackageId)
+bookingRoute.route('/user/:userId')
+    .get(bookingController.getBookingByUserId)
 
 module.exports = bookingRoute;

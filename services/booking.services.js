@@ -6,7 +6,7 @@ exports.createBookingServices = async (data) => {
 }
 
 exports.getBookingServices = async () => {
-    const result = await Booking.find({});
+    const result = await Booking.find({}).populate('packageId');
     const count = await Booking.count();
     return { count, result };
 }
@@ -28,5 +28,10 @@ exports.updateBookingServicesById = async (id, data) => {
 
 exports.getBookingServicesByPackageId = async (id) => {
     const result = await Booking.find({ packageId: id });
+    return result;
+}
+
+exports.getBookingServicesByUserId = async (id) => {
+    const result = await Booking.find({ userId: id }).populate('packageId');
     return result;
 }

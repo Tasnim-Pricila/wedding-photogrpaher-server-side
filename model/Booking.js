@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -22,10 +21,10 @@ const bookingSchema = mongoose.Schema({
         type: String,
         required: [true, "Address is required"],
     },
-    bookingDate: {
+    bookingDate: [{
         type: Date,
         required: [true, "Booking Date is required"],
-    }
+    }]
 }, {
     timestamps: true
 })

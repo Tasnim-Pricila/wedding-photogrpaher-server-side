@@ -1,4 +1,4 @@
-const { createBookingServices, getBookingServices, getBookingServicesById, updateBookingServicesById, getBookingServicesByPackageId } = require("../services/booking.services");
+const { createBookingServices, getBookingServices, getBookingServicesById, updateBookingServicesById, getBookingServicesByPackageId, getBookingServicesByUserId } = require("../services/booking.services");
 
 exports.createBooking = async(req, res) => {
     try {
@@ -90,6 +90,31 @@ exports.getBookingByPackageId = async(req, res) => {
     // console.log(req.params);
     try {
         const result = await getBookingServicesByPackageId(packageId);
+        if(!result){
+            return res.status(400).send({
+                status: 'fail',
+                message: "Could not find any Booking with this ID",
+                // error: error.message
+            })
+        }
+        res.status(200).send({
+            status: 'success',
+            message: "Booking get successfully",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).send({
+            status: 'fail',
+            message: "Could not find any Bookings",
+            error: error.message
+        })
+    }
+}
+exports.getBookingByUserId = async(req, res) => {
+    const { userId } = req.params;
+    // console.log(req.params);
+    try {
+        const result = await getBookingServicesByUserId(userId);
         if(!result){
             return res.status(400).send({
                 status: 'fail',

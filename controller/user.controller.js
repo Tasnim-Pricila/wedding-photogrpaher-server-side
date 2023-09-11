@@ -1,4 +1,4 @@
-const { registerService, findUserByEmail, findUserById } = require("../services/user.services");
+const { registerService, findUserByEmail, findUserById, getAllUsersServices } = require("../services/user.services");
 
 exports.register = async (req, res) => {
     try {
@@ -86,6 +86,7 @@ exports.getUser = async (req, res) => {
         })
     }
 }
+
 exports.getUserById = async (req, res) => {
     try {
         const user = await findUserById(req.params.id);
@@ -97,6 +98,23 @@ exports.getUserById = async (req, res) => {
     } catch (error) {
         res.status(400).send({
             status: "fail",
+            error: error.message
+        })
+    }
+}
+
+exports.getAllUserss = async(req, res) => {
+    try {
+        const result = await getAllUsersServices();
+        res.status(200).send({
+            status: 'success',
+            message: "Users get successfully",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).send({
+            status: 'fail',
+            message: "Could not find any users",
             error: error.message
         })
     }

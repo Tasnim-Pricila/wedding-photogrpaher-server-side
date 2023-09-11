@@ -13,3 +13,9 @@ exports.findUserById = async (id) => {
     const user = await User.findOne({ _id: id })
     return user;
 }
+
+exports.getAllUsersServices = async () => {
+    const result = await User.find({});
+    const count = await User.count();
+    return { count, result };
+}
